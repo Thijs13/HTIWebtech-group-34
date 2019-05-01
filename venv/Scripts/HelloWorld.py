@@ -1,1 +1,1 @@
-Hello world mama dd
+print( "je moeder")
