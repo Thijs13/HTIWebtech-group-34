@@ -82,7 +82,10 @@ def findRoot(data):
 
 
 def drawArrow(x1, y1, x2, y2):
-    angle = atan((x1-x2)/(y1-y2))
+    if y1-y2 == 0:
+        angle = -pi/2
+    else:
+        angle = atan((x1-x2)/(y1-y2))
     min = 1
     if y1 <= y2:
         min = -1
@@ -91,8 +94,8 @@ def drawArrow(x1, y1, x2, y2):
     w.create_line(x1, y1, xEdge, yEdge, arrow=tk.LAST, arrowshape="16 20 6")
 
 
-# circleVisual([[1], [3], [3, 5], [2], [0, 2, 3], []])
+circleVisual([[1], [3], [3, 5], [2], [0, 2, 3], [], [1]])
 # hierarchicalVisual([[1, 2], [3, 4], [5, 6], [], [], [], []])
 # hierarchicalVisual([[1], [2, 3, 4], [5, 6], [], [], [], []])
-hierarchicalVisual([[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12], [], [], [], [], [], [], [], [], []])
+# hierarchicalVisual([[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12], [], [], [], [], [], [], [], [], []])
 master.mainloop()
