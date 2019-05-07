@@ -1,5 +1,6 @@
 class Node:
 
+    # links is a list of list, with the inner list being a node reference and a relation strength
     def __init__(self, name, links):
         self.name = name
         self.links = links
