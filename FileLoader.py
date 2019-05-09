@@ -28,8 +28,8 @@ class FileLoader:
             count = 0
             i = 0
             while i < len(line) - 1:
-                if int(line[i]) != 0:
-                    nodes[numNode].addLink([nodes[count], int(line[i])])
+                # if int(line[i]) != 0:
+                nodes[numNode].addLink([nodes[count], int(line[i])])
                 count += 1
                 i += 2
             numNode += 1
