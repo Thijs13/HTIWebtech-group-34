@@ -34,15 +34,15 @@ class AdjacencyMatrix:
         ax.set_yticklabels(y)
 
         # Rotate the tick labels and set their alignment.
-        plt.setp(ax.get_xticklabels(), rotation=145, ha="right",
+        plt.setp(ax.get_xticklabels(), rotation=45, ha="right",
                  rotation_mode="anchor")
 
         # Loop over data dimensions and create text annotations.
-        for i in range(len(y)):
-            for j in range(len(x)):
-                text = ax.text(j, i, nodes[i, j],
-                               ha="center", va="center", color="w")
+        #for i in range(len(y)):
+        #    for j in range(len(x)):
+        #        text = ax.text(j, i, nodes[i, j],
+        #                       ha="center", va="center", color="w")
 
-        ax.set_title("Zellufgemaakt")
+        ax.set_title("MyMatrix")
         fig.tight_layout()
         plt.show()

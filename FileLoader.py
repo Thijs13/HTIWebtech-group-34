@@ -1,6 +1,6 @@
 from DataSet import DataSet
 from Node import Node
-
+from AdjacencyMatrix import *
 class FileLoader:
 
     def readFile(self, file):
@@ -36,11 +36,14 @@ class FileLoader:
         return ds
 
 
-# file = open("ReadFileTest", "r")
-# fileLoader = FileLoader()
-# result = fileLoader.readFile(file)
+file = open("TestData", "r")
+fileLoader = FileLoader()
+result = fileLoader.readFile(file)
 # for i in result.getNodes():
 #     print("name: " + i.getName())
 #     for j in i.getLinks():
 #         print("   " + j[0].getName())
 #         print("   " + str(j[1]))
+
+adjacencyMatrix = AdjacencyMatrix()
+adjacencyMatrix.makeMatrix(result)
