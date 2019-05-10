@@ -1,5 +1,7 @@
 from DataSet import DataSet
 from Node import Node
+from nodevis import nodevis
+
 from AdjacencyMatrix import *
 class FileLoader:
 
@@ -40,7 +42,6 @@ class FileLoader:
         return ds
 
 
-#file = open("GephiMatrix_co-citation.csv", "r")
 file = open("GephiMatrix_author_similarity.csv", "r")
 fileLoader = FileLoader()
 result = fileLoader.readFile(file)
@@ -49,6 +50,3 @@ for i in result.getNodes():
     for j in i.getLinks():
         print("   " + j[0].getName())
         print("   " + str(j[1]))
-
-# adjacencyMatrix = AdjacencyMatrix()
-# adjacencyMatrix.makeMatrix(result)
