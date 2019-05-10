@@ -12,26 +12,22 @@ class AdjacencyMatrix:
             names.append(i.getName())
         for i in range(len(ds.getNodes())):
             nodes.append([])
-            print(i)
             for j in range(len(ds.getNodes())):
                 nodes[i].append(ds.getNodes()[i].getLinks()[j][1])
-                print(j)
 
         y = names
         x = names
-
         nodes = np.array(nodes)
-
 
         fig, ax = plt.subplots()
         im = ax.imshow(nodes)
 
-        # We want to show all ticks...
+        # Shows all entries in the data set
         ax.set_xticks(np.arange(len(x)))
         ax.set_yticks(np.arange(len(y)))
-        # ... and label them with the respective list entries
-        ax.set_xticklabels(x)
-        ax.set_yticklabels(y)
+        # Adds the labels to the axis
+        #ax.set_xticklabels(x)
+        #ax.set_yticklabels(y)
 
         # Rotate the tick labels and set their alignment.
         plt.setp(ax.get_xticklabels(), rotation=45, ha="right",
@@ -42,6 +38,7 @@ class AdjacencyMatrix:
         #    for j in range(len(x)):
         #        text = ax.text(j, i, nodes[i, j],
         #                       ha="center", va="center", color="w")
+
 
         ax.set_title("MyMatrix")
         fig.tight_layout()
