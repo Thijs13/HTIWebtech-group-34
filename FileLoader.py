@@ -1,5 +1,6 @@
 from DataSet import DataSet
 from Node import Node
+from nodevis import nodevis
 
 class FileLoader:
 
@@ -36,11 +37,13 @@ class FileLoader:
         return ds
 
 
-# file = open("ReadFileTest", "r")
-# fileLoader = FileLoader()
-# result = fileLoader.readFile(file)
+file = open("testdata", "r")
+fileLoader = FileLoader()
+result = fileLoader.readFile(file)
 # for i in result.getNodes():
 #     print("name: " + i.getName())
 #     for j in i.getLinks():
 #         print("   " + j[0].getName())
 #         print("   " + str(j[1]))
+nodevis = nodevis()
+nodevis.drawgraph(result)
