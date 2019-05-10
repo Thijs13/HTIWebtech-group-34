@@ -1,7 +1,6 @@
 import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
-# sphinx_gallery_thumbnail_number = 2
 
 
 class AdjacencyMatrix:
@@ -29,11 +28,11 @@ class AdjacencyMatrix:
         #ax.set_xticklabels(x)
         #ax.set_yticklabels(y)
 
-        # Rotate the tick labels and set their alignment.
+        # Positioning of the labels
         plt.setp(ax.get_xticklabels(), rotation=45, ha="right",
                  rotation_mode="anchor")
 
-        # Loop over data dimensions and create text annotations.
+        # Code for adding value labels to each node
         #for i in range(len(y)):
         #    for j in range(len(x)):
         #        text = ax.text(j, i, nodes[i, j],

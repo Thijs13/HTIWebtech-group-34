@@ -53,9 +53,16 @@ result = fileLoader.readFile(file)
 #        print("   " + j[0].getName())
 #        print("   " + str(j[1]))
 
-
-adjacencyMatrix = AdjacencyMatrix()
-adjacencyMatrix.makeMatrix(result)
-
-nodevis = nodevis()
-nodevis.drawgraph(result)
+running = True
+while running:
+    choice = int(input("Type 1 for Adjacency Matrix, Type 2 for Node Link diagram, Type 3 to exit: "))
+    if choice == 1:
+        adjacencyMatrix = AdjacencyMatrix()
+        adjacencyMatrix.makeMatrix(result)
+    elif choice == 2:
+        nodevis = nodevis()
+        nodevis.drawgraph(result)
+    elif choice == 3:
+        running = False
+    else:
+        print("Wrong input")
