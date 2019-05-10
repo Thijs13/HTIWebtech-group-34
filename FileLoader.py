@@ -30,16 +30,17 @@ class FileLoader:
             while i < len(line) - 1:
                 # if int(line[i]) != 0:
                 number = ""
-                while line[i] != ";":
+                while line[i] != ";" and line[i] != "\n":
                     number += line[i]
                     i += 1
                 nodes[numNode].addLink([nodes[count], float(number)])
                 count += 1
-                i += 2
+                i += 1
             numNode += 1
         return ds
 
 
+#file = open("GephiMatrix_co-citation.csv", "r")
 file = open("GephiMatrix_author_similarity.csv", "r")
 fileLoader = FileLoader()
 result = fileLoader.readFile(file)
