@@ -11,10 +11,8 @@ class nodevis:
 
         for i in range(len(ds.getNodes())):
             nodes.append([])
-            print(i)
             for j in range(len(ds.getNodes())):
                 nodes[i].append(ds.getNodes()[i].getLinks()[j][1])
-                print(j)
 
         adj = np.array(nodes)
         G = nx.from_numpy_matrix(adj)
