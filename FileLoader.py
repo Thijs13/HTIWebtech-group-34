@@ -29,21 +29,25 @@ class FileLoader:
             i = 0
             while i < len(line) - 1:
                 # if int(line[i]) != 0:
-                nodes[numNode].addLink([nodes[count], int(line[i])])
+                number = ""
+                while line[i] != ";":
+                    number += line[i]
+                    i += 1
+                nodes[numNode].addLink([nodes[count], float(number)])
                 count += 1
                 i += 2
             numNode += 1
         return ds
 
 
-file = open("TestData", "r")
+file = open("GephiMatrix_author_similarity.csv", "r")
 fileLoader = FileLoader()
 result = fileLoader.readFile(file)
-# for i in result.getNodes():
-#     print("name: " + i.getName())
-#     for j in i.getLinks():
-#         print("   " + j[0].getName())
-#         print("   " + str(j[1]))
+for i in result.getNodes():
+    print("name: " + i.getName())
+    for j in i.getLinks():
+        print("   " + j[0].getName())
+        print("   " + str(j[1]))
 
-adjacencyMatrix = AdjacencyMatrix()
-adjacencyMatrix.makeMatrix(result)
+# adjacencyMatrix = AdjacencyMatrix()
+# adjacencyMatrix.makeMatrix(result)
