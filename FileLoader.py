@@ -2,6 +2,7 @@ from DataSet import DataSet
 from Node import Node
 from nodevis import nodevis
 
+from AdjacencyMatrix import *
 class FileLoader:
 
     def readFile(self, file):
@@ -30,7 +31,11 @@ class FileLoader:
             i = 0
             while i < len(line) - 1:
                 # if int(line[i]) != 0:
-                nodes[numNode].addLink([nodes[count], int(line[i])])
+                number = ""
+                while line[i] != ";":
+                    number += line[i]
+                    i += 1
+                nodes[numNode].addLink([nodes[count], float(number)])
                 count += 1
                 i += 2
             numNode += 1
