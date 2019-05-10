@@ -23,8 +23,8 @@ class AdjacencyMatrix:
         im = ax.imshow(nodes)
 
         # Shows all entries in the data set
-        ax.set_xticks(np.arange(len(x)))
-        ax.set_yticks(np.arange(len(y)))
+        #ax.set_xticks(np.arange(len(x)))
+        #ax.set_yticks(np.arange(len(y)))
         # Adds the labels to the axis
         #ax.set_xticklabels(x)
         #ax.set_yticklabels(y)
