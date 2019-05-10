@@ -37,7 +37,7 @@ class FileLoader:
         return ds
 
 
-file = open("testdata", "r")
+file = open("GephiMatrix_co-citation.csv", "r")
 fileLoader = FileLoader()
 result = fileLoader.readFile(file)
 # for i in result.getNodes():
