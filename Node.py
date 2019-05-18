@@ -32,6 +32,12 @@ class Node:
                 numLinks += 1
         return numLinks
 
+    def totLinkStrength(self):
+        total = 0
+        for link in self.getLinks():
+            total += link[1]
+        return total
+
     def print(self):
         print(self.getName())
         for link in self.getLinks():

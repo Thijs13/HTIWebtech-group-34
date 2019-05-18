@@ -5,18 +5,19 @@ class DataSetSort:
 
     def DesConnectionSort(self, ds):
         nodes = ds.getNodes()
-        nodes.sort(key = self.sortKey)
-        for node in nodes:
-            node.print()
+        nodes.sort(key = self.sortConnectionKey)
         ds.setNodes(nodes)
-        # ds.print()
         return ds
-        # self.mergeSort(nodes)
 
-    def sortKey(self, node):
+    def sortConnectionKey(self, node):
         return node.numLinks()
 
-    def mergeSort(self, nodes):
-        if nodes.length() != 1:
-            length = nodes.length()
-            n1 = nodes[0]
+    def DesStrengthSort(self, ds):
+        nodes = ds.getNodes()
+        nodes.sort(key = self.sortStrengthKey)
+        ds.setNodes(nodes)
+        return ds
+
+    def sortStrengthKey(self, node):
+        return node.totLinkStrength()
+
