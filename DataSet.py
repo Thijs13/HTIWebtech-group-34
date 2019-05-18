@@ -21,4 +21,8 @@ class DataSet:
     def deleteNode(self, target):
         self.nodes.remove(target)
 
+    def print(self):
+        for node in self.getNodes():
+            node.print()
+
 

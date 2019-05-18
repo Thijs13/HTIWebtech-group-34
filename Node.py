@@ -24,3 +24,15 @@ class Node:
         for link in self.links:
             if link[1] == name:
                 self.links.remove(link)
+
+    def numLinks(self):
+        numLinks = 0
+        for link in self.getLinks():
+            if link[1] != 0:
+                numLinks += 1
+        return numLinks
+
+    def print(self):
+        print(self.getName())
+        for link in self.getLinks():
+            print("  " + link[0].getName() + ": " + str(link[1]))
