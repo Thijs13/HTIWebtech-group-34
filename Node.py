@@ -5,26 +5,37 @@ class Node:
         self.name = name
         self.links = links
 
+    # returns the name
     def getName(self):
         return self.name
 
+    # returns a list with all links
     def getLinks(self):
         return self.links
 
+    # replaces the name of the node
     def setName(self, name):
         self.name = name
 
+    # replace the list of links
     def setLinks(self, links):
         self.links = links
 
+    # adds a link to the list of links
     def addLink(self, link):
         self.links.append(link)
 
-    def removeLink(self, name):
+    # removes a link with the inputted name from the list of links
+    def removeLinkByName(self, name):
         for link in self.links:
-            if link[1] == name:
+            if link[1].getName() == name:
                 self.links.remove(link)
 
+    # removes the inputted link from the list of links
+    def removeLink(self, target):
+        self.links.remove(target)
+
+    # returns the number of non-zero links
     def numLinks(self):
         numLinks = 0
         for link in self.getLinks():
@@ -32,17 +43,20 @@ class Node:
                 numLinks += 1
         return numLinks
 
+    # returns the sum of link strengths
     def totLinkStrength(self):
         total = 0
         for link in self.getLinks():
             total += link[1]
         return total
 
+    # prints the name and links of the node
     def print(self):
         print(self.getName())
         for link in self.getLinks():
             print("  " + link[0].getName() + ": " + str(link[1]))
 
+    # checks if the node has a non-zero relation with the inputted node
     def checkLink(self, node):
         for link in self.getLinks():
             if link[0] == node and link[1] != 0:
