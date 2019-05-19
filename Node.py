@@ -42,3 +42,9 @@ class Node:
         print(self.getName())
         for link in self.getLinks():
             print("  " + link[0].getName() + ": " + str(link[1]))
+
+    def checkLink(self, node):
+        for link in self.getLinks():
+            if link[0] == node and link[1] != 0:
+                return True
+        return False

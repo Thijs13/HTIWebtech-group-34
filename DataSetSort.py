@@ -5,7 +5,7 @@ class DataSetSort:
 
     def DesConnectionSort(self, ds):
         nodes = ds.getNodes()
-        nodes.sort(key = self.sortConnectionKey)
+        nodes.sort(key = self.sortConnectionKey, reverse = True)
         ds.setNodes(nodes)
         return ds
 
@@ -14,7 +14,7 @@ class DataSetSort:
 
     def DesStrengthSort(self, ds):
         nodes = ds.getNodes()
-        nodes.sort(key = self.sortStrengthKey)
+        nodes.sort(key = self.sortStrengthKey, reverse = True)
         ds.setNodes(nodes)
         return ds
 
