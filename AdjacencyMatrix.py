@@ -2,6 +2,12 @@ import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
 
+import pandas as pd
+from bokeh.io import output_file, show
+from bokeh.models import BasicTicker, ColorBar, LinearColorMapper, ColumnDataSource, PrintfTickFormatter
+from bokeh.plotting import figure
+from bokeh.transform import transform
+
 
 class AdjacencyMatrix:
     def makeMatrix(self, ds):
@@ -14,31 +20,52 @@ class AdjacencyMatrix:
             for j in range(len(ds.getNodes())):
                 nodes[i].append(ds.getNodes()[i].getLinks()[j][1])
 
-        y = names
-        x = names
-        nodes = np.array(nodes)
 
-        fig, ax = plt.subplots()
-        im = ax.imshow(nodes)
+        df = pd.DataFrame(
+            nodes,
+            columns=names,
+            index=names)
+        df.index.name = 'X'
+        df.columns.name = 'Y'
 
-        # Shows all entries in the data set
-        #ax.set_xticks(np.arange(len(x)))
-        #ax.set_yticks(np.arange(len(y)))
-        # Adds the labels to the axis
-        #ax.set_xticklabels(x)
-        #ax.set_yticklabels(y)
-
-        # Positioning of the labels
-        plt.setp(ax.get_xticklabels(), rotation=45, ha="right",
-                 rotation_mode="anchor")
-
-        # Code for adding value labels to each node
-        #for i in range(len(y)):
-        #    for j in range(len(x)):
-        #        text = ax.text(j, i, nodes[i, j],
-        #                       ha="center", va="center", color="w")
+        # Prepare data.frame in the right format
+        df = df.stack().rename("value").reset_index()
 
 
-        ax.set_title("MyMatrix")
-        fig.tight_layout()
-        plt.show()
+        # here the plot :
+        output_file("matrixPlot.html")
+
+        # You can use your own palette here
+        colors = ['#fc8715', '#fc942f', '#fda148', '#fdae61', '#fdbb7a', '#fec893', '#fed5ad']
+
+        # Had a specific mapper to map color with value
+        mapper = LinearColorMapper(
+            palette=colors, low=df.value.min(), high=df.value.max())
+        # Define a figure
+        p = figure(
+            plot_width=800,
+            plot_height=800,
+            title="Matrix Visualization",
+            x_range=list(df.X.drop_duplicates()),
+            y_range=list(df.Y.drop_duplicates()),
+            toolbar_location=None,
+            tools="",
+            x_axis_location="above")
+        # Create rectangle for heatmap
+        p.rect(
+            x="X",
+            y="Y",
+            width=1,
+            height=1,
+            source=ColumnDataSource(df),
+            line_color=None,
+            fill_color=transform('value', mapper))
+        # Add legend
+        color_bar = ColorBar(
+            color_mapper=mapper,
+            location=(0, 0),
+            ticker=BasicTicker(desired_num_ticks=len(colors)))
+
+        p.add_layout(color_bar, 'right')
+
+        show(p)

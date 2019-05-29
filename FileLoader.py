@@ -43,7 +43,7 @@ class FileLoader:
         return ds
 
 
-file = open("TestDataSmall", "r")
+file = open("TestData", "r")
 fileLoader = FileLoader()
 result = fileLoader.readFile(file)
 #for i in result.getNodes():
