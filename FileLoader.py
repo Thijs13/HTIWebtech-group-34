@@ -1,7 +1,6 @@
 from DataSet import DataSet
 from Node import Node
 from nodevis import nodevis
-
 from AdjacencyMatrix import *
 
 
@@ -53,16 +52,16 @@ result = fileLoader.readFile(file)
 #        print("   " + j[0].getName())
 #        print("   " + str(j[1]))
 
-running = True
-while running:
+while True:
     choice = int(input("Type 1 for Adjacency Matrix, Type 2 for Node Link diagram, Type 3 to exit: "))
     if choice == 1:
         adjacencyMatrix = AdjacencyMatrix()
         adjacencyMatrix.makeMatrix(result)
     elif choice == 2:
-        nodevis = nodevis()
-        nodevis.drawgraph(result)
+        nv = nodevis()
+        nv.drawgraph(result)
     elif choice == 3:
-        running = False
+        result.print()
+        break
     else:
         print("Wrong input")
