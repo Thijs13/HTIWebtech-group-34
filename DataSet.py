@@ -53,16 +53,22 @@ class DataSet:
                     link[1] = 0
 
     # returns the ds as two dimensional array with level 1 the nodes and level 2 that nodes links
-    def getDoubleList(self):
+    # set filter to 0 to have no filter
+    # set reverse to true to reverse the order of the links within the nodes. mainly for matrix visualisation
+    def getDoubleList(self, filter, reverse):
         result = []
         for i in range(len(self.getNodes())):
             result.append([])
             curNode = self.getNodes()[i]
             for j in range(len(self.getNodes())):
-                #curIndex = curNode.getLinks().index(self.getNodes()[j])
                 curIndex = self.returnIndex(curNode.getLinks(), self.getNodes()[j])
                 link = curNode.getLinks()[curIndex][1]
+                if link < filter and filter != 0:
+                    link = 0
                 result[i].append(link)
+            if reverse:
+                result[i].reverse()
+
         return result
 
     # returns the index of a node in an list of links. Made primarily for getDoubleList()

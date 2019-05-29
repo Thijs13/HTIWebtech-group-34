@@ -12,18 +12,21 @@ from bokeh.transform import transform
 class AdjacencyMatrix:
     def makeMatrix(self, ds):
         names = []
-        nodes = []
+        # nodes = []
         for i in ds.getNodes():
             names.append(i.getName())
-        for i in range(len(ds.getNodes())):
-            nodes.append([])
-            for j in range(len(ds.getNodes())):
-                nodes[i].append(ds.getNodes()[i].getLinks()[j][1])
+        # for i in range(len(ds.getNodes())):
+        #     nodes.append([])
+        #     for j in range(len(ds.getNodes())):
+        #         nodes[i].append(ds.getNodes()[i].getLinks()[j][1])
+        nodes = ds.getDoubleList(0, True)
 
+        yNames = names.copy()
+        yNames.reverse()
 
         df = pd.DataFrame(
             nodes,
-            columns=names,
+            columns=yNames,
             index=names)
         df.index.name = 'X'
         df.columns.name = 'Y'
@@ -37,7 +40,7 @@ class AdjacencyMatrix:
 
         # You can use your own palette here
         colors = ['#fc8715', '#fc942f', '#fda148', '#fdae61', '#fdbb7a', '#fec893', '#fed5ad']
-
+        colors.reverse()
         # Had a specific mapper to map color with value
         mapper = LinearColorMapper(
             palette=colors, low=df.value.min(), high=df.value.max())

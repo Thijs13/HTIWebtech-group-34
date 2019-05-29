@@ -10,13 +10,16 @@ from bokeh.palettes import Spectral4
 class nodevis:
     def drawgraph(self, ds):
         G = nx.Graph()  # create an empty graph with no nodes and no edges
-        nodes = []
-        for i in range(len(ds.getNodes())):
-            nodes.append([])
-            # print(ds.getNodes()[i].getName())
-            for j in range(len(ds.getNodes())):
-                nodes[i].append(ds.getNodes()[i].getLinks()[j][1])
-                # print("   " + str(ds.getNodes()[i].getLinks()[j][1]))
+
+        # nodes = []
+        # for i in range(len(ds.getNodes())):
+        #     nodes.append([])
+        #     # print(ds.getNodes()[i].getName())
+        #     for j in range(len(ds.getNodes())):
+        #         nodes[i].append(ds.getNodes()[i].getLinks()[j][1])
+        #         # print("   " + str(ds.getNodes()[i].getLinks()[j][1]))
+
+        nodes = ds.getDoubleList(0, False)
 
         adj = np.array(nodes)
         G = nx.from_numpy_matrix(adj)
