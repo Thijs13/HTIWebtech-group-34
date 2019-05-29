@@ -44,7 +44,7 @@ class FileLoader:
         return ds
 
 
-file = open("TestData", "r")
+file = open("GephiMatrix_co-authorship.csv", "r")
 fileLoader = FileLoader()
 result = fileLoader.readFile(file)
 #for i in result.getNodes():
