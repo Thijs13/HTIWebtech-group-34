@@ -62,3 +62,17 @@ class Node:
             if link[0] == node and link[1] != 0:
                 return True
         return False
+
+    # returns the highest link strength
+    def maxLink(self):
+        maxVal = self.getLinks()[0][1]
+        for link in self.getLinks():
+            maxVal = max(maxVal, link[1])
+        return maxVal
+
+    # returns the lowest link strength
+    def minLink(self):
+        minVal = self.getLinks()[0][1]
+        for link in self.getLinks():
+            minVal = min(minVal, link[1])
+        return minVal
