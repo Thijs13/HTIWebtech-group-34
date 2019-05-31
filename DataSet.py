@@ -1,3 +1,7 @@
+import networkx as nx
+import numpy as np
+from Node import *
+
 class DataSet:
 
     def __init__(self, nodes):
@@ -30,6 +34,13 @@ class DataSet:
         for node in self.getNodes():
             node.print()
 
+    # returns a list of names of all nodes
+    def getNames(self):
+        names = []
+        for i in self.getNodes():
+            names.append(i.getName())
+        return names
+
     # returns the highest link strength of all the nodes
     def maxLink(self):
         maxVal = self.getNodes()[0].maxLink()
@@ -43,6 +54,12 @@ class DataSet:
         for node in self.getNodes():
             minVal = min(minVal, node.minLink())
         return minVal
+
+    # sets all link strengths of the ds to 0
+    def setToZero(self):
+        for i in self.getNodes():
+            for j in i.getLinks():
+                j[1] = 0
 
     # for all nodes, if they have a link to a node that does not have a link back, set that link to 0
     def makeUndirectional(self):
@@ -79,3 +96,31 @@ class DataSet:
                 return count
             count += 1
         return -1
+
+    # adds nodes based on the inputted two dimensional edge array and name array
+    # note that this function deletes existing data in the ds
+    def buildFromList(self, list, nameList):
+        nodes = []
+        for i in nameList:
+            node = Node(i, [])
+            nodes.append(node)
+        for i in range(len(list)):
+            for j in range(len(list[i])):
+                nodes[i].addLink([nameList[j], list[i][j]])
+        self.setNodes(nodes)
+
+    # turns the data in the ds into a minimum spanning tree.
+    # note that this function deletes other data in the ds
+    def toMinSpanTree(self):
+        nodeList = self.getDoubleList(0, False)
+        numpyArray = np.array(nodeList)
+        netX = nx.from_numpy_matrix(numpyArray)
+        netX = nx.minimum_spanning_tree(netX)
+        nxList = nx.to_edgelist(netX)
+        self.setToZero()
+        for i in nxList:
+            print(i)
+        nodes = self.getNodes()
+        for i in nxList:
+            nodes[i[0]].getLinks()[i[1]][1] = i[2]['weight']
+
