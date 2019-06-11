@@ -69,6 +69,13 @@ class DataSet:
                 if not link[0].checkLink(node):
                     link[1] = 0
 
+    # for all nodes, if they get a link from a node that do not have a link to, set that link to 1
+    def makeUndirectionalAdd(self):
+        for node in self.getNodes():
+            for link in node.getLinks():
+                if link[0].checkLink(node):
+                    link[1] = link[0].getLink(node)
+
     # returns the ds as two dimensional array with level 1 the nodes and level 2 that nodes links
     # set filter to 0 to have no filter
     # set reverse to true to reverse the order of the links within the nodes. mainly for matrix visualisation
@@ -109,6 +116,29 @@ class DataSet:
                 nodes[i].addLink([nameList[j], list[i][j]])
         self.setNodes(nodes)
 
+    # returns true if the ds contains nodes with identical names
+    def checkDoubleNames(self):
+        for i in self.getNodes():
+            name = i.getName()
+            nameCount = 0
+            for j in self.getNodes():
+                if j.getName() == name:
+                    nameCount += 1
+                if nameCount > 1:
+                    return True
+        return False
+
+    def editDoubleNames(self):
+        for i in self.getNodes():
+            numName = 0
+            for j in self.getNodes():
+                if j.getName() == i.getName():
+                    if numName > 0:
+                        newName = j.getName() + str(numName)
+                        j.setName(newName)
+                        print(newName)
+                    numName += 1
+
     # turns the data in the ds into a minimum spanning tree.
     # note that this function deletes other data in the ds
     def toMinSpanTree(self):
@@ -118,9 +148,49 @@ class DataSet:
         netX = nx.minimum_spanning_tree(netX)
         nxList = nx.to_edgelist(netX)
         self.setToZero()
-        for i in nxList:
-            print(i)
         nodes = self.getNodes()
         for i in nxList:
             nodes[i[0]].getLinks()[i[1]][1] = i[2]['weight']
 
+    # returns the distance matrix of the current ds
+    # note that this function takes (at least) O(n^3) worst case time
+    def distanceMatrix(self):
+        oldDs = self.getNodes()
+        self.toMinSpanTree()
+        self.makeUndirectionalAdd()
+        nodes = self.getNodes()
+        self.setNodes(oldDs)
+
+        disMatrix = []
+        names = self.getNames()
+
+        count = 0
+        for i in nodes:
+            print(count)
+            count += 1
+            disMatrix.append([])
+            checknodes = [[i, 0]]
+            for j in range(len(i.getLinks())):
+                curNode = checknodes[j][0]
+                curDis = checknodes[j][1]
+                for k in curNode.getLinks():
+                    if k[1] != 0 and not self.checkPresent(checknodes, k[0]):
+                        checknodes.append([k[0], curDis + k[1]])
+                if j == len(checknodes) - 1:
+                    for k in self.getNodes():
+                       if not self.checkPresent(checknodes, k):
+                           checknodes.append([k, -1])
+                    break
+            for j in names:
+                for k in checknodes:
+                    if k[0].getName() == j:
+                        disMatrix[-1].append(k[1])
+        return disMatrix
+
+    # support function for the distanceMatrix function
+    # check if a target is present in a list of lists as first item of the second level list
+    def checkPresent(self, list, target):
+        for i in list:
+            if i[0] == target:
+                return True
+        return False
