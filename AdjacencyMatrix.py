@@ -15,10 +15,6 @@ class AdjacencyMatrix:
         # nodes = []
         for i in ds.getNodes():
             names.append(i.getName())
-        # for i in range(len(ds.getNodes())):
-        #     nodes.append([])
-        #     for j in range(len(ds.getNodes())):
-        #         nodes[i].append(ds.getNodes()[i].getLinks()[j][1])
         nodes = ds.getDoubleList(0, True)
 
         yNames = names.copy()
@@ -39,7 +35,12 @@ class AdjacencyMatrix:
         output_file("matrixPlot.html")
 
         # You can use your own palette here
-        colors = ['#fc8715', '#fc942f', '#fda148', '#fdae61', '#fdbb7a', '#fec893', '#fed5ad']
+        colorList = []
+        for i in range(100):
+            color = (255, 255, i)
+            colorList.append(color)
+        colors = colorList
+        #[(255, 255, 255), '#fc942f', '#fda148', '#fdae61', '#fdbb7a', '#fec893', '#fed5ad']
         colors.reverse()
         # Had a specific mapper to map color with value
         mapper = LinearColorMapper(
@@ -51,8 +52,8 @@ class AdjacencyMatrix:
             title="Matrix Visualization",
             x_range=list(df.X.drop_duplicates()),
             y_range=list(df.Y.drop_duplicates()),
-            toolbar_location=None,
-            tools="",
+            toolbar_location="below",
+            tools="pan,wheel_zoom,box_zoom,reset",
             x_axis_location="above")
         # Create rectangle for heatmap
         p.rect(
@@ -69,6 +70,6 @@ class AdjacencyMatrix:
             location=(0, 0),
             ticker=BasicTicker(desired_num_ticks=len(colors)))
 
+        p.xaxis.major_label_orientation = 'vertical'
         p.add_layout(color_bar, 'right')
-
         show(p)
