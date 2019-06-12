@@ -63,6 +63,12 @@ class Node:
                 return True
         return False
 
+    # gets the link value to the inputted Node
+    def getLink(self, target):
+        for i in self.getLinks():
+            if i[0] == target:
+                return i[1]
+
     # returns the highest link strength
     def maxLink(self):
         maxVal = self.getLinks()[0][1]
