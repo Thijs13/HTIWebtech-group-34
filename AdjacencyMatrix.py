@@ -54,7 +54,6 @@ class AdjacencyMatrix:
         p = figure(
             plot_width=800,
             plot_height=800,
-            title="Adjacency Matrix",
             x_range=list(df.X.drop_duplicates()),
             y_range=list(df.Y.drop_duplicates()),
 
@@ -87,6 +86,7 @@ class AdjacencyMatrix:
             p.yaxis.visible = False
         else:
             pass
+
         p.xaxis.major_label_orientation = 'vertical'
         p.add_layout(color_bar, 'right')
         show(p)
