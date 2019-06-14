@@ -1,0 +1,94 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="language" content="EN" />
+	<meta name="author" content="Steven" />
+	<title>Visualisation Tool</title>
+
+	<link rel="stylesheet" type="text/css" href="css/stylesheets.css" />
+	<link href="http://fonts.googleapis.com/css?family=Inder" rel="stylesheet" type="text/css" />
+	<link rel="icon" type="image/ico" href="img/favicon.ico" />
+
+  <link rel="stylesheet" href="https://cdn.pydata.org/bokeh/release/bokeh-1.2.0.min.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.2.0.min.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.pydata.org/bokeh/release/bokeh-tables-1.2.0.min.css" type="text/css">
+
+  <script type="text/javascript" src="https://cdn.pydata.org/bokeh/release/bokeh-1.2.0.min.js"></script>
+  <script type="text/javascript" src="https://cdn.pydata.org/bokeh/release/bokeh-api-1.2.0.min.js"></script>
+  <script type="text/javascript" src="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.2.0.min.js"></script>
+  <script type="text/javascript" src="https://cdn.pydata.org/bokeh/release/bokeh-tables-1.2.0.min.js"></script>
+</head>
+<body>
+  <div id="page">
+    <div id="header">
+      <div id="header-content">
+        <h1>Visualisation Tool</h1>
+      </div>
+    </div>
+    <div id="ribbon">
+      <div id="ribbon-content">
+
+  <p>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      <ul class=flashes>
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+      </ul>
+      {% endif %}
+    {% endwith %}
+  </p>
+        <form method="post" action="/" enctype="multipart/form-data">
+          <dl>
+              <p>
+                     <h2>Select file(s) to upload</h2>
+                     <input type="file" name="file" autocomplete="off" required>
+
+              <input type="submit" value="Submit">
+          </p>
+        </dl>
+        </form>
+      </div>
+    </div>
+    <div id="container">
+      <table style="width:100%">
+        <tr>
+          <th>
+            Node-link Diagram
+          </th>
+          <th>
+            Adjacency Matrix
+          </th>
+        </tr>
+      </table>
+      <br />
+      {{ script|safe }}
+      {{ div|safe }}
+      <table style="width:100%">
+        <tr>
+          <td>
+            <center><button>Filter</button></center>
+            <br />
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec ex lacinia, elementum nibh eget, placerat nibh.
+            Ut dapibus porta sem. Donec facilisis rhoncus aliquam. Suspendisse augue libero, elementum sed viverra id, fringilla et ante.
+            Sed scelerisque in sem sit amet rutrum. Phasellus eget luctus nunc. Nullam a eros et ipsum suscipit congue.</p>
+          </td>
+          <td>
+            <center><button>Re-order</button><button>Adjacency Matrix</button></center>
+            <br />
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec ex lacinia, elementum nibh eget, placerat nibh.
+            Ut dapibus porta sem. Donec facilisis rhoncus aliquam. Suspendisse augue libero, elementum sed viverra id, fringilla et ante.
+            Sed scelerisque in sem sit amet rutrum. Phasellus eget luctus nunc. Nullam a eros et ipsum suscipit congue.</p>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div id="footer">
+		<div id="footer-content">
+				<h2>&#169;2019 Group 34</h2>
+		</div>
+	</div>
+</body>
+</html>
