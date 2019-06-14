@@ -12,14 +12,15 @@ import webcolors as wc
 
 class AdjacencyMatrix:
     def makeMatrix(self, ds):
+        print("t")
         # getting data from FileLoader and creating the right format
         names = []
         # nodes = []
 
         for i in ds.getNodes():
             names.append(i.getName())
-        # nodes = ds.getDoubleList(0, True)
-        nodes = ds.robinsonReordering()
+        nodes = ds.getDoubleList(0, True)
+        # nodes = ds.robinsonReordering()
 
         yNames = names.copy()
         yNames.reverse()
@@ -53,8 +54,8 @@ class AdjacencyMatrix:
 
         # Creating the figure
         p = figure(
-            plot_width=800,
-            plot_height=800,
+            plot_width=500,
+            plot_height=500,
             x_range=list(df.X.drop_duplicates()),
             y_range=list(df.Y.drop_duplicates()),
 

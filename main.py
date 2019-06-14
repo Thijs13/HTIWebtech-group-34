@@ -23,7 +23,7 @@ from werkzeug.utils import secure_filename
 import urllib.request
 import os, sys
 
-FILEPATH = os.path.join(sys.path[0], "data/TestDataSmall.txt")
+FILEPATH = os.path.join(sys.path[0], "data\TestDataSmall")
 UPLOAD_FOLDER = join(dirname(realpath(__file__)), 'data')
 ALLOWED_EXTENSIONS = set(['txt', 'csv'])
 
@@ -38,7 +38,6 @@ def allowed_file(filename):
 # Index page
 @app.route('/')
 def index():
-    print("t")
     fl = FileLoader()
     file = open(FILEPATH, "r")
 

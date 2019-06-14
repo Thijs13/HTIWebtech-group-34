@@ -32,7 +32,7 @@ class nodevis:
         #nx.draw_networkx(G, pos, with_labels=True)
         # pt.show()
         #plt.show()
-        plot = Plot(plot_width=1000, plot_height=1000,
+        plot = Plot(plot_width=500, plot_height=500,
                     x_range=Range1d(-1.1, 1.1), y_range=Range1d(-1.1, 1.1))
         plot.title.text = "Graph Interaction Demonstration"
 
