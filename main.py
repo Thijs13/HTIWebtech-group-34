@@ -42,7 +42,6 @@ def index():
     file = open(FILEPATH, "r")
 
     ds = fl.readFile(file)
-    ds.editDoubleNames()
 
     nv = nodevis()
     am = AdjacencyMatrix()

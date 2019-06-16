@@ -24,22 +24,31 @@ class FileLoader:
         numNode = 0
         nodes = ds.getNodes()
 
-        # skips the first line because of 8
+        # skips the first line because of names = file.readline()
         for line in file:
             # remove everything up to and including the first ";"
             line = line[len(nodes[numNode].getName()) + 1:]
             count = 0
             i = 0
-            while i < len(line) - 1:
+            while i < len(line) - 1 and count != len(nodes):
                 # if int(line[i]) != 0:
                 number = ""
                 while line[i] != ";" and line[i] != "\n":
                     number += line[i]
                     i += 1
+                try:
+                    number = float(number)
+                except ValueError:
+                    number = 0
                 nodes[numNode].addLink([nodes[count], float(number)])
                 count += 1
                 i += 1
+            while count < len(nodes) - 1:
+                print(count)
+                nodes[numNode].addLink([nodes[count], 0])
+                count += 1
             numNode += 1
+        ds.editDoubleNames()
         return ds
 
 
