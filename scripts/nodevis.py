@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt# nx can be seemed as an alias of networkx module
 import numpy as np
 import pyqtgraph as pt
 from bokeh.io import show, output_file
-from bokeh.models import Plot, Range1d, MultiLine, Circle, HoverTool, TapTool, BoxSelectTool, BoxZoomTool, ResetTool
+from bokeh.models import Plot, Range1d, MultiLine, Circle, HoverTool, TapTool, BoxSelectTool, BoxZoomTool, ResetTool, UndoTool, RedoTool, SaveTool
 from bokeh.models.graphs import from_networkx, NodesAndLinkedEdges, EdgesAndLinkedNodes
 from bokeh.palettes import Spectral4
 
@@ -34,12 +34,14 @@ class nodevis:
         #plt.show()
         plot = Plot(plot_width=500, plot_height=500,
                     x_range=Range1d(-1.1, 1.1), y_range=Range1d(-1.1, 1.1))
-        plot.title.text = "Graph Interaction Demonstration"
+
 
         node_hover_tool = HoverTool(tooltips=[("name", "@name")])
 
         # plot.add_tools(node_hover_tool, BoxZoomTool(), ResetTool())
-        plot.add_tools(node_hover_tool, TapTool(), BoxSelectTool())
+        plot.add_tools(node_hover_tool, TapTool(), BoxSelectTool(), BoxZoomTool(), UndoTool(), RedoTool(), SaveTool(),
+                       ResetTool())
+        plot.toolbar_location = 'left'
 
         graph_renderer = from_networkx(G, nx.circular_layout, scale=1, center=(0, 0))
 
