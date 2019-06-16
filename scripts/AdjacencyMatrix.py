@@ -61,7 +61,7 @@ class AdjacencyMatrix:
 
             # Adding a toolbar
             toolbar_location="right",
-            tools="hover,pan,box_zoom,reset",
+            tools="hover,pan,box_zoom,undo,redo,reset,save",
             x_axis_location="above")
 
         # Create rectangle for heatmap
