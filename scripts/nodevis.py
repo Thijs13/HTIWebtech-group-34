@@ -19,7 +19,7 @@ class nodevis:
         #         nodes[i].append(ds.getNodes()[i].getLinks()[j][1])
         #         # print("   " + str(ds.getNodes()[i].getLinks()[j][1]))
 
-        ds.toMinSpanTree()
+        # ds.toMinSpanTree()
         nodes = ds.getDoubleList(0, False)
 
         adj = np.array(nodes)
