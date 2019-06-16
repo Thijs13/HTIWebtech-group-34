@@ -12,7 +12,6 @@ import webcolors as wc
 
 class AdjacencyMatrix:
     def makeMatrix(self, ds):
-        print("t")
         # getting data from FileLoader and creating the right format
         names = []
         # nodes = []
@@ -20,6 +19,7 @@ class AdjacencyMatrix:
         for i in ds.getNodes():
             names.append(i.getName())
         nodes = ds.getDoubleList(0, True)
+        # nodes = ds.distanceMatrix(True)
         # nodes = ds.robinsonReordering()
 
         yNames = names.copy()
