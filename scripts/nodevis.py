@@ -1,7 +1,6 @@
 import networkx as nx
 import matplotlib.pyplot as plt# nx can be seemed as an alias of networkx module
 import numpy as np
-import pyqtgraph as pt
 from bokeh.io import show, output_file
 from bokeh.models import Plot, Range1d, MultiLine, Circle, HoverTool, TapTool, BoxSelectTool, BoxZoomTool, ResetTool, UndoTool, RedoTool, SaveTool
 from bokeh.models.graphs import from_networkx, NodesAndLinkedEdges, EdgesAndLinkedNodes
