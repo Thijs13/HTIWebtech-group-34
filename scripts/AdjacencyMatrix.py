@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
 
+from scripts.DataSetSort import *
 import pandas as pd
 from bokeh.io import output_file, show
 from bokeh.models import BasicTicker, ColorBar, LinearColorMapper, ColumnDataSource, PrintfTickFormatter
@@ -13,15 +14,13 @@ import webcolors as wc
 class AdjacencyMatrix:
     def makeMatrix(self, ds):
         # getting data from FileLoader and creating the right format
-        names = []
-        # nodes = []
 
-        for i in ds.getNodes():
-            names.append(i.getName())
+        dataSetSort = DataSetSort()
+        dataSetSort.robinsonSort(ds)
+
+        names = ds.getNames()
         nodes = ds.getDoubleList(0, True)
         # nodes = ds.distanceMatrix(True)
-        # nodes = ds.robinsonReordering()
-
         yNames = names.copy()
         yNames.reverse()
 
@@ -45,7 +44,7 @@ class AdjacencyMatrix:
         while i < 256:
             color = wc.rgb_to_hex((255-(i-10), 255-(i-20), 255-(i-30)))
             colorList.append(color)
-            i = i + 51
+            i = i + 10
         colors = colorList
 
         # This part maps the colors at intervals

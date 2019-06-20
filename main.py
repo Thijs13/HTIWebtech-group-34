@@ -23,7 +23,7 @@ from werkzeug.utils import secure_filename
 import urllib.request
 import os, sys
 
-FILEPATH = os.path.join(sys.path[0], "data\TestDataSmall")
+FILEPATH = os.path.join(sys.path[0], "data/TestDataSmall")
 UPLOAD_FOLDER = join(dirname(realpath(__file__)), 'data')
 ALLOWED_EXTENSIONS = set(['txt', 'csv'])
 
@@ -42,7 +42,6 @@ def index():
     file = open(FILEPATH, "r")
 
     ds = fl.readFile(file)
-
     nv = nodevis()
     am = AdjacencyMatrix()
 
@@ -62,7 +61,6 @@ def index():
     row1 = row(column1, column2)
 
     script, div = components(row1)
-
     return render_template("index.html", script=script, div=div)
 
 
@@ -80,7 +78,7 @@ def upload_file():
             return redirect(request.url)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            print(file.filename)
+            # print(file.filename)
             global FILEPATH
             FILEPATH = os.path.join(sys.path[0], "data/" + file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))

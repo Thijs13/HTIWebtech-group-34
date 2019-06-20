@@ -82,3 +82,9 @@ class Node:
         for link in self.getLinks():
             minVal = min(minVal, link[1])
         return minVal
+
+    def checkAlone(self):
+        for i in self.getLinks():
+            if i[1] != 0:
+                return False
+        return True

@@ -44,7 +44,7 @@ class FileLoader:
                 count += 1
                 i += 1
             while count < len(nodes) - 1:
-                print(count)
+                # print(count)
                 nodes[numNode].addLink([nodes[count], 0])
                 count += 1
             numNode += 1
