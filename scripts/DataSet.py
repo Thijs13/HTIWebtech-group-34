@@ -94,7 +94,6 @@ class DataSet:
                 result[i].append(link)
             if reverse:
                 result[i].reverse()
-
         return result
 
     # returns the index of a node in an list of links. Made primarily for getDoubleList()
@@ -138,7 +137,7 @@ class DataSet:
                     if numName > 0:
                         newName = j.getName() + str(numName)
                         j.setName(newName)
-                        print(newName)
+                        # print(newName)
                     numName += 1
 
     # turns the data in the ds into a minimum spanning tree.
@@ -156,7 +155,7 @@ class DataSet:
 
     # returns the distance matrix of the current ds
     # note that this function takes (at least) O(n^3) worst case time
-    def distanceMatrix(self):
+    def distanceMatrix(self, reverse):
         oldDs = self.getNodes()
         self.toMinSpanTree()
         self.makeUndirectionalAdd()
@@ -187,6 +186,9 @@ class DataSet:
                 for k in checknodes:
                     if k[0].getName() == j:
                         disMatrix[-1].append(k[1])
+        if reverse:
+            for i in disMatrix:
+                i.reverse()
         return disMatrix
 
     # support function for the distanceMatrix function
@@ -197,11 +199,11 @@ class DataSet:
                 return True
         return False
 
-    def robinsonReordering(self):
-        nodes = self.getDoubleList(0, False)
-        distMat = pdist(nodes)
-        orderedMatrix = complete(distMat)
-        orderedMatrix = orderedMatrix.tolist()
-        for i in orderedMatrix:
-            print(i)
-        return orderedMatrix
+    # def robinsonReordering(self):
+    #     nodes = self.getDoubleList(0, False)
+    #     distMat = pdist(nodes)
+    #     orderedMatrix = complete(distMat)
+    #     orderedMatrix = orderedMatrix.tolist()
+    #     for i in orderedMatrix:
+    #         print(i)
+    #     return orderedMatrix
