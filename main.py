@@ -69,7 +69,7 @@ def index():
 def result():
     slider1 = ""
     if request.method == 'POST':
-        slider1 = request.form["slider1"]
+        slider1 = request.form["slider3"]
         print(slider1)
         global FILTERMIN
         FILTERMIN = int(slider1)
