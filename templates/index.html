@@ -63,12 +63,19 @@
         </tr>
       </table>
       <br />
-      {{ script|safe }}
+      <form action = "http://localhost:5000/result" method = "POST">
+        {{ script|safe }}
+        <input type="range" min=0 max=10 value=1 class="slider"
+        id="myRange" name="slider3">
+        <input type="submit" value="submit" />
+      </form>
       {{ div|safe }}
       <table style="width:100%">
         <tr>
           <td>
-            <center><button>Filter</button></center>
+            <center>
+                <button>Filter</button>
+            </center>
             <br />
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec ex lacinia, elementum nibh eget, placerat nibh.
             Ut dapibus porta sem. Donec facilisis rhoncus aliquam. Suspendisse augue libero, elementum sed viverra id, fringilla et ante.

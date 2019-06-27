@@ -7,7 +7,7 @@ from bokeh.models.graphs import from_networkx, NodesAndLinkedEdges, EdgesAndLink
 from bokeh.palettes import Spectral4
 
 class nodevis:
-    def drawgraph(self, ds):
+    def drawgraph(self, ds, filterMin):
         G = nx.Graph()  # create an empty graph with no nodes and no edges
 
         # nodes = []
@@ -19,7 +19,7 @@ class nodevis:
         #         # print("   " + str(ds.getNodes()[i].getLinks()[j][1]))
 
         # ds.toMinSpanTree()
-        nodes = ds.getDoubleList(0, False)
+        nodes = ds.getDoubleList(filterMin, 10, False)
 
         adj = np.array(nodes)
         G = nx.from_numpy_matrix(adj)

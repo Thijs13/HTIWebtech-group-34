@@ -27,6 +27,8 @@ FILEPATH = os.path.join(sys.path[0], "data/TestDataSmall")
 UPLOAD_FOLDER = join(dirname(realpath(__file__)), 'data')
 ALLOWED_EXTENSIONS = set(['txt', 'csv'])
 
+FILTERMIN = 0
+
 app = Flask(__name__, static_url_path="", static_folder="static")
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -45,23 +47,33 @@ def index():
     nv = nodevis()
     am = AdjacencyMatrix()
 
-    plot = nv.drawgraph(ds)
-    plot2 = am.makeMatrix(ds)
+    plot = nv.drawgraph(ds, FILTERMIN)
+    plot2 = am.makeMatrix(ds, FILTERMIN)
 
-    slider1 = Slider(start=0, end=10, value=1, step=.1, title="Stuff")
-    slider2 = Slider(start=0, end=10, value=1, step=.1, title="Stuff")
-    slider3 = RangeSlider(start=0, end=10, value=(1, 9), step=.1, title="Stuff")
+    slider1 = Slider(start=0, end=10, value=1, step=.1, title="Stuff", id="slider1")
+    slider2 = RangeSlider(start=0, end=10, value=(1, 9), step=.1, title="Stuff", id="slider2")
 
     menu = [("Item 1", "item_1"), ("Item 2", "item_2"), None, ("Item 3", "item_3")]
     dropdown = Dropdown(label="Dropdown button", button_type="warning", menu=menu)
 
-    column1 = column(plot, dropdown, slider2, slider3)
-    column2 = column(plot2, dropdown, slider2, slider3)
+    column1 = column(plot, dropdown, slider1, slider2)
+    column2 = column(plot2, dropdown, slider1, slider2)
 
     row1 = row(column1, column2)
 
     script, div = components(row1)
     return render_template("index.html", script=script, div=div)
+
+
+@app.route('/result', methods = ['GET', 'POST'])
+def result():
+    slider1 = ""
+    if request.method == 'POST':
+        slider1 = request.form["slider1"]
+        print(slider1)
+        global FILTERMIN
+        FILTERMIN = int(slider1)
+        return redirect('/')
 
 
 @app.route('/', methods=['GET', 'POST'])

@@ -79,9 +79,9 @@ class DataSet:
                     link[1] = link[0].getLink(node)
 
     # returns the ds as two dimensional array with level 1 the nodes and level 2 that nodes links
-    # set filter to 0 to have no filter
+    # set filters to 0 to have no filter
     # set reverse to true to reverse the order of the links within the nodes. mainly for matrix visualisation
-    def getDoubleList(self, filter, reverse):
+    def getDoubleList(self, filterMin, filterMax, reverse):
         result = []
         for i in range(len(self.getNodes())):
             result.append([])
@@ -89,7 +89,7 @@ class DataSet:
             for j in range(len(self.getNodes())):
                 curIndex = self.returnIndex(curNode.getLinks(), self.getNodes()[j])
                 link = curNode.getLinks()[curIndex][1]
-                if link < filter and filter != 0:
+                if not (filterMin <= link <= filterMax) and filterMin != 0 and filterMax != 0:
                     link = 0
                 result[i].append(link)
             if reverse:

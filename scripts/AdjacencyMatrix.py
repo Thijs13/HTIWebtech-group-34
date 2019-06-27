@@ -12,14 +12,14 @@ import webcolors as wc
 
 
 class AdjacencyMatrix:
-    def makeMatrix(self, ds):
+    def makeMatrix(self, ds, filterMin):
         # getting data from FileLoader and creating the right format
 
         dataSetSort = DataSetSort()
-        dataSetSort.robinsonSort(ds)
+        # dataSetSort.robinsonSort(ds)
 
         names = ds.getNames()
-        nodes = ds.getDoubleList(0, True)
+        nodes = ds.getDoubleList(filterMin, 10, True)
         # nodes = ds.distanceMatrix(True)
         yNames = names.copy()
         yNames.reverse()
@@ -40,12 +40,21 @@ class AdjacencyMatrix:
 
         # Creating the array containing the colors
         colorList = []
-        i = 0
-        while i < 256:
-            color = wc.rgb_to_hex((255-(i-10), 255-(i-20), 255-(i-30)))
-            colorList.append(color)
-            i = i + 10
-        colors = colorList
+
+        # i = 0
+        # while i < 256:
+        #     color = wc.rgb_to_hex((255-(i-10), 255-(i-20), 255-(i-30)))
+        #     colorList.append(color)
+        #     i = i + 10
+
+        colorList = [(36, 113, 163), (46, 134, 193), (23, 165, 137), (19, 141, 117), (34, 153, 84), (40, 180, 99)
+                     ,(31, 97, 141), (17, 122, 101)]#,(202, 111, 30), (186, 74, 0)]
+        colors = []
+        for i in colorList:
+            color = wc.rgb_to_hex(i)
+            colors.append(color)
+
+        #colors = colorList
 
         # This part maps the colors at intervals
         mapper = LinearColorMapper(
