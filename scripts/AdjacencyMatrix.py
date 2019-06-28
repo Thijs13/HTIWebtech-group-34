@@ -94,11 +94,11 @@ class AdjacencyMatrix:
             location=(0, 0),
             ticker=BasicTicker(desired_num_ticks=len(colors)))
 
-        if len(list(df.X.drop_duplicates())) > p.plot_width / 4:
+        if len(list(df.X.drop_duplicates())) > p.plot_width / 10:
             p.xaxis.visible = False
         else:
             pass
-        if len(list(df.Y.drop_duplicates())) > p.plot_height / 4:
+        if len(list(df.Y.drop_duplicates())) > p.plot_height / 10:
             p.yaxis.visible = False
         else:
             pass

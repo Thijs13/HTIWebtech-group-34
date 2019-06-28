@@ -36,8 +36,7 @@ class nodevis:
         plot = Plot(plot_width=500, plot_height=500,
                     x_range=Range1d(-1.1, 1.1), y_range=Range1d(-1.1, 1.1))
 
-
-        node_hover_tool = HoverTool(tooltips=[("name", "@name")])
+        node_hover_tool = HoverTool(tooltips=[("Name of this node", "@name")])
 
         # plot.add_tools(node_hover_tool, BoxZoomTool(), ResetTool())
         plot.add_tools(node_hover_tool, TapTool(), BoxSelectTool(), BoxZoomTool(), UndoTool(), RedoTool(), SaveTool(),
