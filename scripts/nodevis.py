@@ -7,7 +7,7 @@ from bokeh.models.graphs import from_networkx, NodesAndLinkedEdges, EdgesAndLink
 from bokeh.palettes import Spectral4
 
 class nodevis:
-    def drawgraph(self, ds, filterMin):
+    def drawgraph(self, ds, filterMin, filterMax, layout):
         G = nx.Graph()  # create an empty graph with no nodes and no edges
 
         # nodes = []
@@ -19,7 +19,7 @@ class nodevis:
         #         # print("   " + str(ds.getNodes()[i].getLinks()[j][1]))
 
         # ds.toMinSpanTree()
-        nodes = ds.getDoubleList(filterMin, 10, False)
+        nodes = ds.getDoubleList(filterMin, filterMax, False)
 
         x = filterMin
 
@@ -43,9 +43,12 @@ class nodevis:
         plot.add_tools(node_hover_tool, TapTool(), BoxSelectTool(), BoxZoomTool(), UndoTool(), RedoTool(), SaveTool(),
                        ResetTool())
         plot.toolbar_location = 'left'
-
-        graph_renderer = from_networkx(G, nx.circular_layout, scale=1, center=(0, 0))
-
+        if layout == 0:
+            graph_renderer = from_networkx(G, nx.circular_layout, scale=1, center=(0, 0))
+        elif layout == 1:
+            graph_renderer = from_networkx(G, nx.spring_layout, scale=1, center=(0, 0))
+        else:
+            graph_renderer = from_networkx(G, nx.random_layout)
         graph_renderer.node_renderer.glyph = Circle(size=15, fill_color=Spectral4[0])
         graph_renderer.node_renderer.selection_glyph = Circle(size=15, fill_color=Spectral4[2])
         graph_renderer.node_renderer.hover_glyph = Circle(size=15, fill_color=Spectral4[1])

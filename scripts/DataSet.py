@@ -143,7 +143,7 @@ class DataSet:
     # turns the data in the ds into a minimum spanning tree.
     # note that this function deletes other data in the ds
     def toMinSpanTree(self):
-        nodeList = self.getDoubleList(0, False)
+        nodeList = self.getDoubleList(0, 0, False)
         numpyArray = np.array(nodeList)
         netX = nx.from_numpy_matrix(numpyArray)
         netX = nx.minimum_spanning_tree(netX)
