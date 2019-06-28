@@ -1,7 +1,7 @@
 from flask import Flask, flash, request, redirect, render_template, send_from_directory, url_for
 import pandas as pd
 from bokeh.embed import components
-from bokeh.plotting import figure
+from bokeh.plotting import figure, curdoc
 from bokeh.resources import CDN
 # os methods for manipulating paths
 from os.path import dirname, join, realpath
@@ -11,7 +11,7 @@ from bokeh.io import curdoc, output_file, show
 from bokeh.models.widgets import Tabs
 from bokeh.layouts import column, row
 from bokeh.models.widgets import *
-from bokeh.models import CustomJS, Slider
+from bokeh.models import CustomJS, Slider, ColumnDataSource, Select
 
 from scripts.FileLoader import *
 # from scripts.Node import nodeLink
@@ -22,6 +22,7 @@ from scripts.AdjacencyMatrix import *
 from werkzeug.utils import secure_filename
 import urllib.request
 import os, sys
+from random import random
 
 FILEPATH = os.path.join(sys.path[0], "data/TestDataSmall")
 UPLOAD_FOLDER = join(dirname(realpath(__file__)), 'data')
@@ -36,7 +37,6 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-
 # Index page
 @app.route('/')
 def index():
@@ -50,14 +50,27 @@ def index():
     plot = nv.drawgraph(ds, FILTERMIN)
     plot2 = am.makeMatrix(ds, FILTERMIN)
 
-    slider1 = Slider(start=0, end=10, value=1, step=.1, title="Stuff", id="slider1")
+    slider1 = Slider(start=0, end=10, value=0, step=1, title="FILTERMIN", id="slider1")
     slider2 = RangeSlider(start=0, end=10, value=(1, 9), step=.1, title="Stuff", id="slider2")
 
-    menu = [("Item 1", "item_1"), ("Item 2", "item_2"), None, ("Item 3", "item_3")]
-    dropdown = Dropdown(label="Dropdown button", button_type="warning", menu=menu)
+    menu = [("Circular", "ordering"), ("Spring", "ordering"), ("Random", "ordering")]
+    menu2 = [("Distance", "matrix"), ("Robinson", "re-ordering")]
 
-    column1 = column(plot, dropdown, slider1, slider2)
-    column2 = column(plot2, dropdown, slider1, slider2)
+    dropdown = Dropdown(label="Ordering", button_type="warning", menu=menu)
+    dropdown2 = Dropdown(label="Ordering", button_type="warning", menu=menu2)
+
+    text_input = TextAreaInput(value=
+    "This is a node-link diagram.",
+    rows=6, title="Info:")
+    text_input2 = TextAreaInput(value=
+    "This is an adjacency matrix.",
+    rows=6, title="Info:")
+
+    #column1 = column(plot, dropdown, slider1, slider2)
+    #column2 = column(plot2, dropdown, slider1, slider2)
+
+    column1 = column(plot, dropdown, text_input)
+    column2 = column(plot2, dropdown2, text_input2)
 
     row1 = row(column1, column2)
 

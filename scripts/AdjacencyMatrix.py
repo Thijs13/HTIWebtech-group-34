@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from scripts.DataSetSort import *
 import pandas as pd
 from bokeh.io import output_file, show
-from bokeh.models import BasicTicker, ColorBar, LinearColorMapper, ColumnDataSource, PrintfTickFormatter
+from bokeh.models import BasicTicker, ColorBar, LinearColorMapper, ColumnDataSource, PrintfTickFormatter, HoverTool, TapTool, BoxSelectTool, BoxZoomTool, ResetTool, UndoTool, RedoTool, SaveTool
 from bokeh.plotting import figure
 from bokeh.transform import transform
 import webcolors as wc
@@ -68,9 +68,15 @@ class AdjacencyMatrix:
             y_range=list(df.Y.drop_duplicates()),
 
             # Adding a toolbar
-            toolbar_location="right",
-            tools="hover,pan,box_zoom,undo,redo,reset,save",
+            #toolbar_location="right",
+            #tools="hover,pan,box_zoom,undo,redo,reset,save",
             x_axis_location="above")
+
+        node_hover_tool = HoverTool(tooltips=[("Name X Axis", "@X"), ("Name Y Axis", "@Y"), ("Relation Strength", "@value")])
+
+        # plot.add_tools(node_hover_tool, BoxZoomTool(), ResetTool())
+        p.add_tools(node_hover_tool, TapTool(), BoxSelectTool(), BoxZoomTool(), UndoTool(), RedoTool())
+        p.toolbar_location = 'right'
 
         # Create rectangle for heatmap
         p.rect(

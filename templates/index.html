@@ -3,7 +3,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta http-equiv="language" content="EN" />
 	<meta name="author" content="Steven" />
-	<title>Visualisation Tool</title>
+	<title>Visualization Tool</title>
 
 	<link rel="stylesheet" type="text/css" href="css/stylesheets.css" />
 	<link href="http://fonts.googleapis.com/css?family=Inder" rel="stylesheet" type="text/css" />
@@ -22,7 +22,7 @@
   <div id="page">
     <div id="header">
       <div id="header-content">
-        <h1>Visualisation Tool</h1>
+        <h1>PTviz: Visualization Tool</h1>
       </div>
     </div>
     <div id="ribbon">
@@ -52,6 +52,12 @@
       </div>
     </div>
     <div id="container">
+      <center><p>Minimum range:</p>
+      <form action = "http://localhost:5000/result" method = "POST">
+        <output name="value" id="valueId">1</output>
+        <input type="range" min=0 max=10 value=1 class="slider" id="myRange" name="slider3" oninput="valueId.value = myRange.value">
+        <input type="submit" value="submit" />
+      </form></center>
       <table style="width:100%">
         <tr>
           <th>
@@ -63,33 +69,8 @@
         </tr>
       </table>
       <br />
-      <form action = "http://localhost:5000/result" method = "POST">
-        {{ script|safe }}
-        <input type="range" min=0 max=10 value=1 class="slider"
-        id="myRange" name="slider3">
-        <input type="submit" value="submit" />
-      </form>
+      {{ script|safe }}
       {{ div|safe }}
-      <table style="width:100%">
-        <tr>
-          <td>
-            <center>
-                <button>Filter</button>
-            </center>
-            <br />
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec ex lacinia, elementum nibh eget, placerat nibh.
-            Ut dapibus porta sem. Donec facilisis rhoncus aliquam. Suspendisse augue libero, elementum sed viverra id, fringilla et ante.
-            Sed scelerisque in sem sit amet rutrum. Phasellus eget luctus nunc. Nullam a eros et ipsum suscipit congue.</p>
-          </td>
-          <td>
-            <center><button>Re-order</button><button>Adjacency Matrix</button></center>
-            <br />
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec ex lacinia, elementum nibh eget, placerat nibh.
-            Ut dapibus porta sem. Donec facilisis rhoncus aliquam. Suspendisse augue libero, elementum sed viverra id, fringilla et ante.
-            Sed scelerisque in sem sit amet rutrum. Phasellus eget luctus nunc. Nullam a eros et ipsum suscipit congue.</p>
-          </td>
-        </tr>
-      </table>
     </div>
   </div>
   <div id="footer">

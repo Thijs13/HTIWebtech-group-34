@@ -30,6 +30,12 @@ th {
 	font-size: 14px;
 }
 
+form {
+	color:#1e1e1e;
+	font-family: 'Arial', sans-serif;
+	font-size: 10px;
+}
+
 A:link {color: #c57531; text-decoration: none;}
 A:visited {color: #c57531; text-decoration: none;}
 A:active {color: #c57531; text-decoration: none;}
