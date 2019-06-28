@@ -62,15 +62,8 @@ def index():
     dropdown = Dropdown(label="Ordering", button_type="warning", menu=menu)
     dropdown2 = Dropdown(label="Ordering", button_type="warning", menu=menu2)
 
-    # text_input = TextAreaInput(value=
-    # "This is a node-link diagram. filter:",
-    # rows=6, title="Info:")
-    # text_input2 = TextAreaInput(value=
-    # "This is an adjacency matrix.",
-    # rows=6, title="Info:")
-
-    infoNode = Div(text="test1", width=200, height=100)
-    infoMatrix = Div(text="test2", width=200, height=100)
+    infoNode = Div(text=ds.getStatsNode(FILTERMIN, 10), width=400, height=100)
+    infoMatrix = Div(text=ds.getStatsMatrix(FILTERMIN, 10), width=400, height=100)
 
     #column1 = column(plot, dropdown, slider1, slider2)
     #column2 = column(plot2, dropdown, slider1, slider2)

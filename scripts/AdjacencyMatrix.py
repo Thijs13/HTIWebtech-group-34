@@ -51,20 +51,20 @@ class AdjacencyMatrix:
         # Creating the array containing the colors
         colorList = []
 
-        # i = 0
-        # while i < 256:
-        #     color = wc.rgb_to_hex((255-(i-10), 255-(i-20), 255-(i-30)))
-        #     colorList.append(color)
-        #     i = i + 10
+        i = 0
+        while i < 256:
+            color = wc.rgb_to_hex((255-(i-10), 255-(i-20), 255-(i-30)))
+            colorList.append(color)
+            i = i + 10
 
-        colorList = [(36, 113, 163), (46, 134, 193), (23, 165, 137), (19, 141, 117), (34, 153, 84), (40, 180, 99)
-                     ,(31, 97, 141), (17, 122, 101)]#,(202, 111, 30), (186, 74, 0)]
-        colors = []
-        for i in colorList:
-            color = wc.rgb_to_hex(i)
-            colors.append(color)
+        #colorList = [(23, 165, 137), (19, 141, 117), (40, 180, 99), (36, 113, 163)
+        #             , (31, 97, 141), (17, 122, 101), (46, 134, 193), (34, 153, 84)]#,(202, 111, 30), (186, 74, 0)]
+        #colors = []
+        #for i in colorList:
+        #    color = wc.rgb_to_hex(i)
+        #    colors.append(color)
 
-        #colors = colorList
+        colors = colorList
 
         # This part maps the colors at intervals
         mapper = LinearColorMapper(

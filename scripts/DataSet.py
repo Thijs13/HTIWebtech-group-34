@@ -13,6 +13,24 @@ class DataSet:
     def getNodes(self):
         return self.nodes
 
+    # returns the total amount of links in ds
+    def getNumLinks(self):
+        result = 0
+        nodes = self.getNodes()
+        for i in nodes:
+            result += i.numLinks()
+        return result
+
+    # returns the amount of visible links in ds
+    def getNumLinksVis(self, filterMin, filterMax):
+        result = 0
+        doubleList = self.getDoubleList(filterMin, filterMax, False)
+        for i in doubleList:
+            for j in i:
+                if j != 0:
+                    result += 1
+        return result
+    
     # replaces the list of nodes
     def setNodes(self, nodes):
         self.nodes = nodes
@@ -199,11 +217,19 @@ class DataSet:
                 return True
         return False
 
-    # def robinsonReordering(self):
-    #     nodes = self.getDoubleList(0, False)
-    #     distMat = pdist(nodes)
-    #     orderedMatrix = complete(distMat)
-    #     orderedMatrix = orderedMatrix.tolist()
-    #     for i in orderedMatrix:
-    #         print(i)
-    #     return orderedMatrix
+    def getStatsNode(self, filterMin, filterMax):
+        result = ""
+        result += "Total number of nodes: " + str(len(self.getNodes())) 
+        result += "<br> Total number of links: " + str(self.getNumLinks())
+        result += "<br> Total number of links within filter range: " + str(self.getNumLinksVis(filterMin, filterMax))
+        result += "<br> Highest link strength " + str(self.maxLink())
+        result += "<br> Lowest link strength " + str(self.minLink())
+        return result
+
+    def getStatsMatrix(self, filterMin, filterMax):
+        result = ""
+        result += "Total number of fields in Matrix: " + str(len(self.getNodes())**2)
+        result += "<br> Total number of nonzero fields: " + str(self.getNumLinksVis(filterMin, filterMax))
+        result += "<br> Highest link strength " + str(self.maxLink())
+        result += "<br> Lowest link strength " + str(self.minLink())
+        return result
