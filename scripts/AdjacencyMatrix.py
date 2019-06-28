@@ -12,15 +12,25 @@ import webcolors as wc
 
 
 class AdjacencyMatrix:
-    def makeMatrix(self, ds, filterMin):
+    def makeMatrix(self, ds, filterMin, filterMax, reorder):
         # getting data from FileLoader and creating the right format
 
         dataSetSort = DataSetSort()
-        # dataSetSort.robinsonSort(ds)
+        if reorder == 0:
+            nodes = ds.getDoubleList(filterMin, filterMax, True)
+        elif reorder == 1:
+            dataSetSort.DesConnectionSort(ds)
+            nodes = ds.getDoubleList(filterMin, filterMax, True)
+        elif reorder == 2:
+            dataSetSort.DesStrengthSort(ds)
+            nodes = ds.getDoubleList(filterMin, filterMax, True)
+        elif reorder == 3:
+            nodes = ds.distanceMatrix(True)
+        elif reorder == 4:
+            dataSetSort.robinsonSort(ds)
+            nodes = ds.getDoubleList(filterMin, filterMax, True)
 
         names = ds.getNames()
-        nodes = ds.getDoubleList(filterMin, 10, True)
-        # nodes = ds.distanceMatrix(True)
         yNames = names.copy()
         yNames.reverse()
 

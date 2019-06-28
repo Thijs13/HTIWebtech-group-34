@@ -53,7 +53,7 @@
     </div>
     <div id="container">
       <center><p>Minimum range:</p>
-      <form action = "http://localhost:5000/result" method = "POST">
+      <form action = "http://localhost:5000/filter" method = "POST">
         <output name="value" id="valueId">1</output>
         <input type="range" min=0 max=10 value=1 class="slider" id="myRange" name="slider3" oninput="valueId.value = myRange.value">
         <input type="submit" value="submit" />
@@ -72,6 +72,41 @@
       {{ script|safe }}
       {{ div|safe }}
     </div>
+  <div class="dropdown">
+    <button class="dropbtn">Layout</button>
+    <div class="dropdown-content">
+    <form action = "http://localhost:5000/circular" method = "POST">
+    <button class="menuButton" name="circular" >Circular</button>
+    </form>
+    <form action = "http://localhost:5000/spring" method = "POST">
+    <button class="menuButton" name="spring" >Spring</button>
+    </form>
+    <form action = "http://localhost:5000/random" method = "POST">
+    <button class="menuButton" name="random" >Random</button>
+    </form>
+    </div>
+  </div>
+
+      <div class="dropdown2">
+  <button class="dropbtn">Ordering</button>
+  <div class="dropdown2-content">
+    <form action = "http://localhost:5000/original" method = "POST">
+    <button class="menuButton" name="original">Original</button>
+    </form>
+    <form action = "http://localhost:5000/linkNumber" method = "POST">
+    <button class="menuButton" name="linkNumber">Sort on number of links</button>
+    </form>
+    <form action = "http://localhost:5000/linkStrength" method = "POST">
+    <button class="menuButton" name="linkStrength">Sort on total link strength</button>
+    </form>
+    <form action = "http://localhost:5000/distanceMatrix" method = "POST">
+    <button class="menuButton" name="distanceMatrix">Distance matrix</button>
+    </form>
+    <form action = "http://localhost:5000/robinson" method = "POST">
+    <button class="menuButton" name="robinson">Robinson reordering</button>
+    </form>
+  </div>
+</div>
   </div>
   <div id="footer">
 		<div id="footer-content">

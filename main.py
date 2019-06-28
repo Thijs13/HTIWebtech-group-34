@@ -28,7 +28,10 @@ FILEPATH = os.path.join(sys.path[0], "data/TestDataSmall")
 UPLOAD_FOLDER = join(dirname(realpath(__file__)), 'data')
 ALLOWED_EXTENSIONS = set(['txt', 'csv'])
 
+LAYOUT = 0
 FILTERMIN = 0
+FILTERMAX = math.inf
+REORDER = 0
 
 app = Flask(__name__, static_url_path="", static_folder="static")
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -47,8 +50,8 @@ def index():
     nv = nodevis()
     am = AdjacencyMatrix()
 
-    plot = nv.drawgraph(ds, FILTERMIN)
-    plot2 = am.makeMatrix(ds, FILTERMIN)
+    plot = nv.drawgraph(ds, FILTERMIN, FILTERMAX, LAYOUT)
+    plot2 = am.makeMatrix(ds, FILTERMIN, FILTERMAX, REORDER)
 
     slider1 = Slider(start=0, end=10, value=0, step=1, title="FILTERMIN", id="slider1")
     slider2 = RangeSlider(start=0, end=10, value=(1, 9), step=.1, title="Stuff", id="slider2")
@@ -65,8 +68,8 @@ def index():
     #column1 = column(plot, dropdown, slider1, slider2)
     #column2 = column(plot2, dropdown, slider1, slider2)
 
-    column1 = column(plot, dropdown, infoNode)
-    column2 = column(plot2, dropdown2, infoMatrix)
+    column1 = column(plot, infoNode)
+    column2 = column(plot2, infoMatrix)
 
     row1 = row(column1, column2)
 
@@ -74,7 +77,7 @@ def index():
     return render_template("index.html", script=script, div=div)
 
 
-@app.route('/result', methods = ['GET', 'POST'])
+@app.route('/filter', methods = ['GET', 'POST'])
 def result():
     slider1 = ""
     if request.method == 'POST':
@@ -105,6 +108,70 @@ def upload_file():
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             return redirect('/')
         return
+
+
+@app.route('/circular', methods = ['GET', 'POST'])
+def circular():
+    if request.method == 'POST':
+        global LAYOUT
+        LAYOUT = 0
+        return redirect('/')
+
+
+@app.route('/spring', methods = ['GET', 'POST'])
+def spring():
+    if request.method == 'POST':
+        global LAYOUT
+        LAYOUT = 1
+        return redirect('/')
+
+
+@app.route('/random', methods = ['GET', 'POST'])
+def random():
+    if request.method == 'POST':
+        global LAYOUT
+        LAYOUT = 2
+        return redirect('/')
+
+
+@app.route('/original', methods = ['GET', 'POST'])
+def original():
+    if request.method == 'POST':
+        global REORDER
+        REORDER = 0
+        return redirect('/')
+
+
+@app.route('/linkNumber', methods = ['GET', 'POST'])
+def linkNumber():
+    if request.method == 'POST':
+        global REORDER
+        REORDER = 1
+        return redirect('/')
+
+
+@app.route('/linkStrength', methods = ['GET', 'POST'])
+def linkStrength():
+    if request.method == 'POST':
+        global REORDER
+        REORDER = 2
+        return redirect('/')
+
+
+@app.route('/distanceMatrix', methods = ['GET', 'POST'])
+def distanceMatrix():
+    if request.method == 'POST':
+        global REORDER
+        REORDER = 3
+        return redirect('/')
+
+
+@app.route('/robinson', methods = ['GET', 'POST'])
+def robinson():
+    if request.method == 'POST':
+        global REORDER
+        REORDER = 4
+        return redirect('/')
 
 
 # @app.route('/static/<filename>')
