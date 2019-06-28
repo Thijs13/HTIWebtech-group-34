@@ -50,8 +50,11 @@ def index():
     nv = nodevis()
     am = AdjacencyMatrix()
 
-    plot = nv.drawgraph(ds, FILTERMIN, FILTERMAX, LAYOUT)
-    plot2 = am.makeMatrix(ds, FILTERMIN, FILTERMAX, REORDER)
+    filterMin = ds.maxLink() * FILTERMIN / 10
+    filterMax = ds.maxLink() * FILTERMAX / 10
+
+    plot = nv.drawgraph(ds, filterMin, filterMax, LAYOUT)
+    plot2 = am.makeMatrix(ds, filterMin, filterMax, REORDER)
 
     slider1 = Slider(start=0, end=10, value=0, step=1, title="FILTERMIN", id="slider1")
     slider2 = RangeSlider(start=0, end=10, value=(1, 9), step=.1, title="Stuff", id="slider2")
