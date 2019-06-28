@@ -174,18 +174,17 @@ class DataSet:
     # returns the distance matrix of the current ds
     # note that this function takes (at least) O(n^3) worst case time
     def distanceMatrix(self, reverse):
-        oldDs = self.getNodes()
-        self.toMinSpanTree()
-        self.makeUndirectionalAdd()
+        # oldDs = self.getNodes()
+        # self.toMinSpanTree()
+        # self.makeUndirectionalAdd()
         nodes = self.getNodes()
-        self.setNodes(oldDs)
-
+        # self.setNodes(oldDs)
         disMatrix = []
         names = self.getNames()
 
         count = 0
         for i in nodes:
-            print(count)
+            # print(count)
             count += 1
             disMatrix.append([])
             checknodes = [[i, 0]]

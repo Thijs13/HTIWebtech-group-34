@@ -3,6 +3,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 
 from scripts.DataSetSort import *
+from scripts.DataSet import *
 import pandas as pd
 from bokeh.io import output_file, show
 from bokeh.models import BasicTicker, ColorBar, LinearColorMapper, ColumnDataSource, PrintfTickFormatter, HoverTool, TapTool, BoxSelectTool, BoxZoomTool, ResetTool, UndoTool, RedoTool, SaveTool
@@ -19,14 +20,18 @@ class AdjacencyMatrix:
         if reorder == 0:
             nodes = ds.getDoubleList(filterMin, filterMax, True)
         elif reorder == 1:
+            dsCopy = DataSet(ds.getNodes())
+            dsCopy.makeUndirectionalAdd()
+            nodes = dsCopy.getDoubleList(filterMin, filterMax, True)
+        elif reorder == 2:
             dataSetSort.DesConnectionSort(ds)
             nodes = ds.getDoubleList(filterMin, filterMax, True)
-        elif reorder == 2:
+        elif reorder == 3:
             dataSetSort.DesStrengthSort(ds)
             nodes = ds.getDoubleList(filterMin, filterMax, True)
-        elif reorder == 3:
-            nodes = ds.distanceMatrix(True)
         elif reorder == 4:
+            nodes = ds.distanceMatrix(True)
+        elif reorder == 5:
             dataSetSort.robinsonSort(ds)
             nodes = ds.getDoubleList(filterMin, filterMax, True)
 

@@ -145,11 +145,19 @@ def original():
         return redirect('/')
 
 
+@app.route('/undirected', methods = ['GET', 'POST'])
+def undirected():
+    if request.method == 'POST':
+        global REORDER
+        REORDER = 1
+        return redirect('/')
+
+
 @app.route('/linkNumber', methods = ['GET', 'POST'])
 def linkNumber():
     if request.method == 'POST':
         global REORDER
-        REORDER = 1
+        REORDER = 2
         return redirect('/')
 
 
@@ -157,7 +165,7 @@ def linkNumber():
 def linkStrength():
     if request.method == 'POST':
         global REORDER
-        REORDER = 2
+        REORDER = 3
         return redirect('/')
 
 
@@ -165,7 +173,7 @@ def linkStrength():
 def distanceMatrix():
     if request.method == 'POST':
         global REORDER
-        REORDER = 3
+        REORDER = 4
         return redirect('/')
 
 
@@ -173,7 +181,7 @@ def distanceMatrix():
 def robinson():
     if request.method == 'POST':
         global REORDER
-        REORDER = 4
+        REORDER = 5
         return redirect('/')
 
 
